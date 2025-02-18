@@ -58,6 +58,15 @@ Pass the full path of your YAML configuration file to the program using the `-f`
 
 See below for an example YAML configuration file.
 
+The program will run continously, producing output every 15 seconds similar to:
+
+```bash
+google.com has 67% availability percentage
+www.github.com has 96% availability percentage
+```
+
+To stop the program, press `ctrl-c`.
+
 ## Example Configuration
 
 ```yaml
