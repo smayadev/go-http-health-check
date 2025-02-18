@@ -150,6 +150,7 @@ func main() {
 			AvailabilityPercentage := math.Round((float64(upCount) / float64(totalCount)) * 100)
 
 			fmt.Printf("%s has %d%% availability percentage\n", domain, int(AvailabilityPercentage))
+
 		}
 
 		time.Sleep(15 * time.Second)
