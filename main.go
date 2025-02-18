@@ -14,6 +14,7 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
+// Struct to store URL data from yaml file
 type Data struct {
 	Name    string            `yaml:"name"`
 	URL     string            `yaml:"url"`
@@ -122,6 +123,7 @@ func main() {
 
 			fullDomain, _ := extractDomain(req.URL)
 
+			// Initialize domain stats if not present
 			if _, exists := domainMap[fullDomain]; !exists {
 				domainMap[fullDomain] = map[string]int{
 					"count": 1,
@@ -131,12 +133,14 @@ func main() {
 				domainMap[fullDomain]["count"] += 1
 			}
 
+			// Start timer for latency test
 			start := time.Now()
 
 			statusCode, _ := getStatusCode(req)
 
 			latency := time.Since(start).Milliseconds()
 
+			// If status code is between 200 and 299 and latency is less than 500ms, consider it up
 			if (statusCode >= 200 && statusCode <= 299) && latency < 500 {
 				domainMap[fullDomain]["up"] += 1
 			}
@@ -145,6 +149,7 @@ func main() {
 
 		for domain, stats := range domainMap {
 
+			// Calculate availability percentage
 			upCount := stats["up"]
 			totalCount := stats["count"]
 			AvailabilityPercentage := math.Round((float64(upCount) / float64(totalCount)) * 100)
