@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"flag"
 	"fmt"
 	"math"
 	"net/http"
@@ -85,10 +86,13 @@ func getStatusCode(data Data) (int, error) {
 
 func main() {
 
+	filename := flag.String("f", "", "Full path to the YAML containing URL data, i.e. /home/user/url_data.yaml")
+	flag.Parse()
+
 	// In-memory map to store domain statistics for program duration
 	domainMap := make(map[string]map[string]int)
 
-	yamlFile, err := os.ReadFile("sample2.yaml")
+	yamlFile, err := os.ReadFile(*filename)
 	if err != nil {
 		fmt.Println("Error reading yaml file:", err)
 		os.Exit(1)
