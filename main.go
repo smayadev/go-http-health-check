@@ -133,7 +133,7 @@ func main() {
 
 			latency := time.Since(start).Milliseconds()
 
-			if (statusCode >= 200 && statusCode <= 299) && latency < 200 {
+			if (statusCode >= 200 && statusCode <= 299) && latency < 500 {
 				domainMap[fullDomain]["up"] += 1
 			}
 
